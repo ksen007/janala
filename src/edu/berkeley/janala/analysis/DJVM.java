@@ -703,4 +703,69 @@ public class DJVM {
         intp.MONITOREXIT(iid);
     }
 
+
+
+
+    public static void GETFIELDORSTATIC_VALUE(int iid, double  v) {
+        intp.GETFIELDORSTATIC_VALUE(iid,v);
+    }
+    public static void GETFIELDORSTATIC_VALUE(int iid, long v) {
+        intp.GETFIELDORSTATIC_VALUE(iid,v);
+    }
+    public static void GETFIELDORSTATIC_VALUE(int iid, Object v) {
+        intp.GETFIELDORSTATIC_VALUE(iid,v);
+    }
+    public static void GETFIELDORSTATIC_VALUE(int iid, boolean v) {
+        intp.GETFIELDORSTATIC_VALUE(iid,v);
+    }
+    public static void GETFIELDORSTATIC_VALUE(int iid, byte v) {
+        intp.GETFIELDORSTATIC_VALUE(iid,v);
+    }
+    public static void GETFIELDORSTATIC_VALUE(int iid, char v) {
+        intp.GETFIELDORSTATIC_VALUE(iid,v);
+    }
+    public static void GETFIELDORSTATIC_VALUE(int iid, float v) {
+        intp.GETFIELDORSTATIC_VALUE(iid,v);
+    }
+    public static void GETFIELDORSTATIC_VALUE(int iid, int v) {
+        intp.GETFIELDORSTATIC_VALUE(iid,v);
+    }
+    public static void GETFIELDORSTATIC_VALUE(int iid, short v) {
+        intp.GETFIELDORSTATIC_VALUE(iid,v);
+    }
+
+    public static void INVOKEMETHOD_VALUE(int iid, double  v) {
+        intp.INVOKEMETHOD_VALUE(iid,v);
+    }
+    public static void INVOKEMETHOD_VALUE(int iid, long v) {
+        intp.INVOKEMETHOD_VALUE(iid,v);
+    }
+    public static void INVOKEMETHOD_VALUE(int iid, Object v) {
+        intp.INVOKEMETHOD_VALUE(iid,v);
+    }
+    public static void INVOKEMETHOD_VALUE(int iid, boolean v) {
+        intp.INVOKEMETHOD_VALUE(iid,v);
+    }
+    public static void INVOKEMETHOD_VALUE(int iid, byte v) {
+        intp.INVOKEMETHOD_VALUE(iid,v);
+    }
+    public static void INVOKEMETHOD_VALUE(int iid, char v) {
+        intp.INVOKEMETHOD_VALUE(iid,v);
+    }
+    public static void INVOKEMETHOD_VALUE(int iid, float v) {
+        intp.INVOKEMETHOD_VALUE(iid,v);
+    }
+    public static void INVOKEMETHOD_VALUE(int iid, int v) {
+        intp.INVOKEMETHOD_VALUE(iid,v);
+    }
+    public static void INVOKEMETHOD_VALUE(int iid, short v) {
+        intp.INVOKEMETHOD_VALUE(iid,v);
+    }
+
+    public static void INVOKEMETHOD_VALUE(int iid) {
+        intp.INVOKEMETHOD_VALUE(iid);
+    }
+    public static void INVOKEMETHOD_EXCEPTION(int iid) {
+        intp.INVOKEMETHOD_EXCEPTION(iid);
+    }
 }
