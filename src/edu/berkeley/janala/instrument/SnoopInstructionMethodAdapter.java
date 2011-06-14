@@ -69,7 +69,8 @@ public class SnoopInstructionMethodAdapter extends MethodAdapter implements Opco
                 mv.visitInsn(ICONST_5);
                 break;
             default:
-                mv.visitIntInsn(BIPUSH,val);
+                mv.visitLdcInsn(new Integer(val));
+                break;
         }
 
     }
@@ -768,9 +769,9 @@ public class SnoopInstructionMethodAdapter extends MethodAdapter implements Opco
         mv.visitJumpInsn(GOTO,end);
         mv.visitLabel(handler);
 
-        addBipushInsn(mv, GlobalStateForInstrumentation.instance.getIid());
-        addBipushInsn(mv,GlobalStateForInstrumentation.instance.getMid());
-        mv.visitMethodInsn(INVOKESTATIC, Config.analysisClass, "INVOKEMETHOD_EXCEPTION", "(II)V");
+        //addBipushInsn(mv, GlobalStateForInstrumentation.instance.getIid());
+        //saddBipushInsn(mv,GlobalStateForInstrumentation.instance.getMid());
+        mv.visitMethodInsn(INVOKESTATIC, Config.analysisClass, "INVOKEMETHOD_EXCEPTION", "()V");
         mv.visitInsn(ATHROW);
 
         mv.visitLabel(end);

@@ -43,7 +43,7 @@ public class SnoopInstructionClassAdapter extends ClassAdapter {
     }
 
     public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
-        //System.out.println("visitMethod "+name);
+        //System.out.println("visitMethod "+name+" desc "+desc);
         MethodVisitor mv = cv.visitMethod(access, name, desc, signature, exceptions);
         if (mv != null) {
             //System.out.println("*******************");

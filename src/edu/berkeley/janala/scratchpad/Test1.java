@@ -40,7 +40,7 @@ public class Test1 {
     }
 
     public static void main(String[] args) {
-        foo(9,3,"Hello");
+        foo(9999999,3,"Hello");
         System.out.println("c");
     }
 }
