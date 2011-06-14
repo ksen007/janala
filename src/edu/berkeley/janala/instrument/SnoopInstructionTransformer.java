@@ -44,20 +44,25 @@ import org.objectweb.asm.ClassWriter;
 public class SnoopInstructionTransformer implements ClassFileTransformer {
 
 	public static void premain(String agentArgs, Instrumentation inst) {
+        System.out.println("calling premain");
 		inst.addTransformer(new SnoopInstructionTransformer());
 	}
 
 	public byte[] transform(ClassLoader loader,String cname, Class<?> c, ProtectionDomain d, byte[] cbuf)
             throws IllegalClassFormatException {
 
-		if (!cname.startsWith("edu.berkeley.cs.janala") && !cname.startsWith("gnu.trove")) {
+		if (!cname.startsWith("edu/berkeley/janala") && !cname.startsWith("gnu/trove")) {
+            System.out.println(">>>>>>>>>>>>>>> transform "+cname);
             ClassReader cr = new ClassReader(cbuf);
             ClassWriter cw = new ClassWriter(cr, 0);
             ClassVisitor cv = new SnoopInstructionClassAdapter(cw);
             cr.accept(cv, 0);
+            //System.out.println("<<<<<<<<<<<<<<< end transform "+cname);
             return cw.toByteArray();
+        } else {
+            //System.out.println("--------------- skipping "+cname);
         }
-		return null;
+		return cbuf;
 	}
 
 }

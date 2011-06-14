@@ -33,7 +33,7 @@ package edu.berkeley.janala.analysis;
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 public class DJVM {
-    public static Interpreter intp = null;
+    public static Interpreter intp = new PrintInterpreter();
 
     public static void LDC(int iid, int mid, int c) {
         intp.LDC(iid,mid,c);
@@ -706,66 +706,66 @@ public class DJVM {
 
 
 
-    public static void GETFIELDORSTATIC_VALUE(int iid, int mid, double  v) {
-        intp.GETFIELDORSTATIC_VALUE(iid,mid,v);
+    public static void GETFIELDORSTATIC_VALUE(double  v) {
+        intp.GETFIELDORSTATIC_VALUE(v);
     }
-    public static void GETFIELDORSTATIC_VALUE(int iid, int mid, long v) {
-        intp.GETFIELDORSTATIC_VALUE(iid,mid,v);
+    public static void GETFIELDORSTATIC_VALUE(long v) {
+        intp.GETFIELDORSTATIC_VALUE(v);
     }
-    public static void GETFIELDORSTATIC_VALUE(int iid, int mid, Object v) {
-        intp.GETFIELDORSTATIC_VALUE(iid,mid,v);
+    public static void GETFIELDORSTATIC_VALUE(Object v) {
+        intp.GETFIELDORSTATIC_VALUE(v);
     }
-    public static void GETFIELDORSTATIC_VALUE(int iid, int mid, boolean v) {
-        intp.GETFIELDORSTATIC_VALUE(iid,mid,v);
+    public static void GETFIELDORSTATIC_VALUE(boolean v) {
+        intp.GETFIELDORSTATIC_VALUE(v);
     }
-    public static void GETFIELDORSTATIC_VALUE(int iid, int mid, byte v) {
-        intp.GETFIELDORSTATIC_VALUE(iid,mid,v);
+    public static void GETFIELDORSTATIC_VALUE(byte v) {
+        intp.GETFIELDORSTATIC_VALUE(v);
     }
-    public static void GETFIELDORSTATIC_VALUE(int iid, int mid, char v) {
-        intp.GETFIELDORSTATIC_VALUE(iid,mid,v);
+    public static void GETFIELDORSTATIC_VALUE(char v) {
+        intp.GETFIELDORSTATIC_VALUE(v);
     }
-    public static void GETFIELDORSTATIC_VALUE(int iid, int mid, float v) {
-        intp.GETFIELDORSTATIC_VALUE(iid,mid,v);
+    public static void GETFIELDORSTATIC_VALUE(float v) {
+        intp.GETFIELDORSTATIC_VALUE(v);
     }
-    public static void GETFIELDORSTATIC_VALUE(int iid, int mid, int v) {
-        intp.GETFIELDORSTATIC_VALUE(iid,mid,v);
+    public static void GETFIELDORSTATIC_VALUE(int v) {
+        intp.GETFIELDORSTATIC_VALUE(v);
     }
-    public static void GETFIELDORSTATIC_VALUE(int iid, int mid, short v) {
-        intp.GETFIELDORSTATIC_VALUE(iid,mid,v);
-    }
-
-    public static void INVOKEMETHOD_VALUE(int iid, int mid, double  v) {
-        intp.INVOKEMETHOD_VALUE(iid,mid,v);
-    }
-    public static void INVOKEMETHOD_VALUE(int iid, int mid, long v) {
-        intp.INVOKEMETHOD_VALUE(iid,mid,v);
-    }
-    public static void INVOKEMETHOD_VALUE(int iid, int mid, Object v) {
-        intp.INVOKEMETHOD_VALUE(iid,mid,v);
-    }
-    public static void INVOKEMETHOD_VALUE(int iid, int mid, boolean v) {
-        intp.INVOKEMETHOD_VALUE(iid,mid,v);
-    }
-    public static void INVOKEMETHOD_VALUE(int iid, int mid, byte v) {
-        intp.INVOKEMETHOD_VALUE(iid,mid,v);
-    }
-    public static void INVOKEMETHOD_VALUE(int iid, int mid, char v) {
-        intp.INVOKEMETHOD_VALUE(iid,mid,v);
-    }
-    public static void INVOKEMETHOD_VALUE(int iid, int mid, float v) {
-        intp.INVOKEMETHOD_VALUE(iid,mid,v);
-    }
-    public static void INVOKEMETHOD_VALUE(int iid, int mid, int v) {
-        intp.INVOKEMETHOD_VALUE(iid,mid,v);
-    }
-    public static void INVOKEMETHOD_VALUE(int iid, int mid, short v) {
-        intp.INVOKEMETHOD_VALUE(iid,mid,v);
+    public static void GETFIELDORSTATIC_VALUE(short v) {
+        intp.GETFIELDORSTATIC_VALUE(v);
     }
 
-    public static void INVOKEMETHOD_VALUE(int iid, int mid) {
-        intp.INVOKEMETHOD_VALUE(iid,mid);
+    public static void INVOKEMETHOD_VALUE(double  v) {
+        intp.INVOKEMETHOD_VALUE(v);
     }
-    public static void INVOKEMETHOD_EXCEPTION(int iid, int mid) {
-        intp.INVOKEMETHOD_EXCEPTION(iid,mid);
+    public static void INVOKEMETHOD_VALUE(long v) {
+        intp.INVOKEMETHOD_VALUE(v);
+    }
+    public static void INVOKEMETHOD_VALUE(Object v) {
+        intp.INVOKEMETHOD_VALUE(v);
+    }
+    public static void INVOKEMETHOD_VALUE(boolean v) {
+        intp.INVOKEMETHOD_VALUE(v);
+    }
+    public static void INVOKEMETHOD_VALUE(byte v) {
+        intp.INVOKEMETHOD_VALUE(v);
+    }
+    public static void INVOKEMETHOD_VALUE(char v) {
+        intp.INVOKEMETHOD_VALUE(v);
+    }
+    public static void INVOKEMETHOD_VALUE(float v) {
+        intp.INVOKEMETHOD_VALUE(v);
+    }
+    public static void INVOKEMETHOD_VALUE(int v) {
+        intp.INVOKEMETHOD_VALUE(v);
+    }
+    public static void INVOKEMETHOD_VALUE(short v) {
+        intp.INVOKEMETHOD_VALUE(v);
+    }
+
+    public static void INVOKEMETHOD_VALUE() {
+        intp.INVOKEMETHOD_VALUE();
+    }
+    public static void INVOKEMETHOD_EXCEPTION() {
+        intp.INVOKEMETHOD_EXCEPTION();
     }
 }

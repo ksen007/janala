@@ -367,43 +367,43 @@ public interface Interpreter {
 
     public void MONITOREXIT(int iid, int mid);
 
-    public void GETFIELDORSTATIC_VALUE(int iid, int mid, double v);
+    public void GETFIELDORSTATIC_VALUE(double v);
 
-    public void GETFIELDORSTATIC_VALUE(int iid, int mid, long v);
+    public void GETFIELDORSTATIC_VALUE(long v);
 
-    public void GETFIELDORSTATIC_VALUE(int iid, int mid, Object v);
+    public void GETFIELDORSTATIC_VALUE(Object v);
 
-    public void GETFIELDORSTATIC_VALUE(int iid, int mid, boolean v);
+    public void GETFIELDORSTATIC_VALUE(boolean v);
 
-    public void GETFIELDORSTATIC_VALUE(int iid, int mid, byte v);
+    public void GETFIELDORSTATIC_VALUE(byte v);
 
-    public void GETFIELDORSTATIC_VALUE(int iid, int mid, char v);
+    public void GETFIELDORSTATIC_VALUE(char v);
 
-    public void GETFIELDORSTATIC_VALUE(int iid, int mid, float v);
+    public void GETFIELDORSTATIC_VALUE(float v);
 
-    public void GETFIELDORSTATIC_VALUE(int iid, int mid, int v);
+    public void GETFIELDORSTATIC_VALUE(int v);
 
-    public void GETFIELDORSTATIC_VALUE(int iid, int mid, short v);
+    public void GETFIELDORSTATIC_VALUE(short v);
 
-    public void INVOKEMETHOD_VALUE(int iid, int mid, double v);
+    public void INVOKEMETHOD_VALUE(double v);
 
-    public void INVOKEMETHOD_VALUE(int iid, int mid, long v);
+    public void INVOKEMETHOD_VALUE(long v);
 
-    public void INVOKEMETHOD_VALUE(int iid, int mid, Object v);
+    public void INVOKEMETHOD_VALUE(Object v);
 
-    public void INVOKEMETHOD_VALUE(int iid, int mid, boolean v);
+    public void INVOKEMETHOD_VALUE(boolean v);
 
-    public void INVOKEMETHOD_VALUE(int iid, int mid, byte v);
+    public void INVOKEMETHOD_VALUE(byte v);
 
-    public void INVOKEMETHOD_VALUE(int iid, int mid, char v);
+    public void INVOKEMETHOD_VALUE(char v);
 
-    public void INVOKEMETHOD_VALUE(int iid, int mid, float v);
+    public void INVOKEMETHOD_VALUE(float v);
 
-    public void INVOKEMETHOD_VALUE(int iid, int mid, int v);
+    public void INVOKEMETHOD_VALUE(int v);
 
-    public void INVOKEMETHOD_VALUE(int iid, int mid, short v);
+    public void INVOKEMETHOD_VALUE(short v);
 
-    public void INVOKEMETHOD_VALUE(int iid, int mid);
+    public void INVOKEMETHOD_VALUE();
 
-    public void INVOKEMETHOD_EXCEPTION(int iid, int mid);
+    public void INVOKEMETHOD_EXCEPTION();
 }

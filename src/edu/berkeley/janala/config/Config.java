@@ -34,5 +34,5 @@ package edu.berkeley.janala.config;
  */
 public class Config {
     public static String analysisClass = System.getProperty("janala.analysisClass",
-            "edu.berkeley.janala.analysis.DJVM");
+            "edu/berkeley/janala/analysis/DJVM");
 }

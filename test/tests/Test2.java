@@ -1,6 +1,4 @@
-package edu.berkeley.janala.instrument;
-
-import gnu.trove.map.hash.TObjectIntHashMap;
+package tests;
 
 /**
  * Copyright (c) 2006-2010,
@@ -34,22 +32,26 @@ import gnu.trove.map.hash.TObjectIntHashMap;
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-public class GlobalStateForInstrumentation {
-    public static GlobalStateForInstrumentation instance = new GlobalStateForInstrumentation();
-    private int iid = 0;
-    private int mid = 0;
+public class Test2 {
+    private static float f;
+    public double y;
+    private long l = 10l;
 
-//    private TObjectIntHashMap<String> classNameToInternalID = new TObjectIntHashMap<String>();
-
-    public int getIid() {
-        return iid++;
+    private int foo(Object x) {
+        return (int)l+x.hashCode();
     }
 
-    public int getMid() {
-        return mid;
-    }
+    public static void main(String[] args) {
+        int x = 4;
+        Test2 t2 = new Test2();
+        t2.y = 89.6d;
+        Test2.f = 34.6f;
+        if (x + t2.foo(t2)>9) {
+            x++;
+        } else {
+            x--;
+        }
+        System.out.println(t2.foo(new Object())+(int)t2.y+x);
 
-    public void incMid() {
-        mid++;
     }
 }

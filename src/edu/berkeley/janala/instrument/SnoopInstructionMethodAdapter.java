@@ -44,6 +44,7 @@ public class SnoopInstructionMethodAdapter extends MethodAdapter implements Opco
     @Override
     public void visitCode() {
         GlobalStateForInstrumentation.instance.incMid();
+        //System.out.println("visitCode");
         mv.visitCode();
     }
 
@@ -76,56 +77,60 @@ public class SnoopInstructionMethodAdapter extends MethodAdapter implements Opco
     private void addValueReadInsn(MethodVisitor mv, String desc, String methodNamePrefix) {
         Type t;
 
-        addBipushInsn(mv, GlobalStateForInstrumentation.instance.getIid());
-        addBipushInsn(mv,GlobalStateForInstrumentation.instance.getMid());
+//        addBipushInsn(mv, GlobalStateForInstrumentation.instance.getIid());
+//        addBipushInsn(mv,GlobalStateForInstrumentation.instance.getMid());
+        //System.out.println("***************** desc "+desc);
         if (desc.startsWith("(")) {
             t = Type.getReturnType(desc);
         } else {
             t = Type.getType(desc);
         }
+        //System.out.println(t + " "+t.getSort());
         switch(t.getSort()) {
             case Type.DOUBLE:
+                //mv.visitInsn(DCONST_1);
                 mv.visitInsn(DUP2);
-                mv.visitMethodInsn(INVOKESTATIC, Config.analysisClass, methodNamePrefix+"VALUE", "(IID)V");
+                mv.visitMethodInsn(INVOKESTATIC, Config.analysisClass, methodNamePrefix+"VALUE", "(D)V");
                 break;
             case Type.LONG:
+                //mv.visitInsn(LCONST_1);
                 mv.visitInsn(DUP2);
-                mv.visitMethodInsn(INVOKESTATIC, Config.analysisClass, methodNamePrefix+"VALUE", "(IIJ)V");
+                mv.visitMethodInsn(INVOKESTATIC, Config.analysisClass, methodNamePrefix+"VALUE", "(J)V");
                 break;
             case Type.ARRAY:
                 mv.visitInsn(DUP);
-                mv.visitMethodInsn(INVOKESTATIC, Config.analysisClass, methodNamePrefix+"VALUE", "(IILjava/lang/Object;)V");
+                mv.visitMethodInsn(INVOKESTATIC, Config.analysisClass, methodNamePrefix+"VALUE", "(Ljava/lang/Object;)V");
                 break;
             case Type.BOOLEAN:
                 mv.visitInsn(DUP);
-                mv.visitMethodInsn(INVOKESTATIC, Config.analysisClass, methodNamePrefix+"VALUE", "(IIZ)V");
+                mv.visitMethodInsn(INVOKESTATIC, Config.analysisClass, methodNamePrefix+"VALUE", "(Z)V");
                 break;
             case Type.BYTE:
                 mv.visitInsn(DUP);
-                mv.visitMethodInsn(INVOKESTATIC, Config.analysisClass, methodNamePrefix+"VALUE", "(IIB)V");
+                mv.visitMethodInsn(INVOKESTATIC, Config.analysisClass, methodNamePrefix+"VALUE", "(B)V");
                 break;
             case Type.CHAR:
                 mv.visitInsn(DUP);
-                mv.visitMethodInsn(INVOKESTATIC, Config.analysisClass, methodNamePrefix+"VALUE", "(IIC)V");
+                mv.visitMethodInsn(INVOKESTATIC, Config.analysisClass, methodNamePrefix+"VALUE", "(C)V");
                 break;
             case Type.FLOAT:
                 mv.visitInsn(DUP);
-                mv.visitMethodInsn(INVOKESTATIC, Config.analysisClass, methodNamePrefix+"VALUE", "(IIF)V");
+                mv.visitMethodInsn(INVOKESTATIC, Config.analysisClass, methodNamePrefix+"VALUE", "(F)V");
                 break;
             case Type.INT:
                 mv.visitInsn(DUP);
-                mv.visitMethodInsn(INVOKESTATIC, Config.analysisClass, methodNamePrefix+"VALUE", "(III)V");
+                mv.visitMethodInsn(INVOKESTATIC, Config.analysisClass, methodNamePrefix+"VALUE", "(I)V");
                 break;
             case Type.OBJECT:
                 mv.visitInsn(DUP);
-                mv.visitMethodInsn(INVOKESTATIC, Config.analysisClass, methodNamePrefix+"VALUE", "(IILjava/lang/Object;)V");
+                mv.visitMethodInsn(INVOKESTATIC, Config.analysisClass, methodNamePrefix+"VALUE", "(Ljava/lang/Object;)V");
                 break;
             case Type.SHORT:
                 mv.visitInsn(DUP);
-                mv.visitMethodInsn(INVOKESTATIC, Config.analysisClass, methodNamePrefix+"VALUE", "(IIS)V");
+                mv.visitMethodInsn(INVOKESTATIC, Config.analysisClass, methodNamePrefix+"VALUE", "(S)V");
                 break;
             case Type.VOID:
-                mv.visitMethodInsn(INVOKESTATIC, Config.analysisClass, methodNamePrefix+"VALUE", "(II)V");
+                mv.visitMethodInsn(INVOKESTATIC, Config.analysisClass, methodNamePrefix+"VALUE", "()V");
                 break;
             default:
                 System.err.println("Unknown field or method descriptor "+desc);
@@ -724,6 +729,7 @@ public class SnoopInstructionMethodAdapter extends MethodAdapter implements Opco
         }
     }
 
+
     @Override
     public void visitMethodInsn(int opcode, String owner, String name, String desc) {
         addBipushInsn(mv, GlobalStateForInstrumentation.instance.getIid());
@@ -777,7 +783,7 @@ public class SnoopInstructionMethodAdapter extends MethodAdapter implements Opco
     public void visitJumpInsn(int opcode, Label label) {
         addBipushInsn(mv, GlobalStateForInstrumentation.instance.getIid());
         addBipushInsn(mv,GlobalStateForInstrumentation.instance.getMid());
-        addBipushInsn(mv, label.getOffset());
+        addBipushInsn(mv, System.identityHashCode(label)); // label.getOffset()
         switch (opcode) {
             case IFEQ:
                 mv.visitMethodInsn(INVOKESTATIC, Config.analysisClass, "IFEQ", "(III)V");
@@ -879,14 +885,14 @@ public class SnoopInstructionMethodAdapter extends MethodAdapter implements Opco
         addBipushInsn(mv,GlobalStateForInstrumentation.instance.getMid());
         addBipushInsn(mv, min);
         addBipushInsn(mv, max);
-        addBipushInsn(mv,dflt.getOffset());
+        addBipushInsn(mv,System.identityHashCode(dflt)); // label.getOffset()
 
         addBipushInsn(mv,labels.length);
         mv.visitIntInsn(NEWARRAY, T_INT);
         for (int i=0; i<labels.length; i++) {
             mv.visitInsn(DUP);
             addBipushInsn(mv,i);
-            addBipushInsn(mv,labels[i].getOffset());
+            addBipushInsn(mv,System.identityHashCode(labels[i])); // label.getOffset()
             mv.visitInsn(IASTORE);
         }
 
@@ -898,7 +904,7 @@ public class SnoopInstructionMethodAdapter extends MethodAdapter implements Opco
     public void visitLookupSwitchInsn(Label dflt, int[] keys, Label[] labels) {
         addBipushInsn(mv, GlobalStateForInstrumentation.instance.getIid());
         addBipushInsn(mv,GlobalStateForInstrumentation.instance.getMid());
-        addBipushInsn(mv,dflt.getOffset());
+        addBipushInsn(mv,System.identityHashCode(dflt));  // label.getOffset()
 
         addBipushInsn(mv,keys.length);
         mv.visitIntInsn(NEWARRAY, T_INT);
@@ -914,7 +920,7 @@ public class SnoopInstructionMethodAdapter extends MethodAdapter implements Opco
         for (int i=0; i<labels.length; i++) {
             mv.visitInsn(DUP);
             addBipushInsn(mv,i);
-            addBipushInsn(mv,labels[i].getOffset());
+            addBipushInsn(mv,System.identityHashCode(labels[i])); // label.getOffset()
             mv.visitInsn(IASTORE);
         }
 
@@ -932,5 +938,9 @@ public class SnoopInstructionMethodAdapter extends MethodAdapter implements Opco
         mv.visitMultiANewArrayInsn(desc, dims);
     }
 
-
+    @Override
+    public void visitMaxs(int maxStack, int maxLocals) {
+        mv.visitMaxs(maxStack + 8, maxLocals);    //To change body of overridden methods use File | Settings | File Templates.
+    }
+    
 }
