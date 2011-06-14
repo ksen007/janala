@@ -1,0 +1,2 @@
+Premain-Class: edu.berkeley.janala.instrument.SnoopInstructionTransformer
+
