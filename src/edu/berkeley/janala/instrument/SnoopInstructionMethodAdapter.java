@@ -1,5 +1,6 @@
 package edu.berkeley.janala.instrument;
 
+import edu.berkeley.janala.analysis.ClassDepot;
 import edu.berkeley.janala.config.Config;
 import org.objectweb.asm.*;
 
@@ -86,6 +87,7 @@ public class SnoopInstructionMethodAdapter extends MethodAdapter implements Opco
         } else {
             t = Type.getType(desc);
         }
+        System.out.println("************************************");
         //System.out.println(t + " "+t.getSort());
         switch(t.getSort()) {
             case Type.DOUBLE:
@@ -701,27 +703,32 @@ public class SnoopInstructionMethodAdapter extends MethodAdapter implements Opco
         mv.visitLdcInsn(owner);
         mv.visitLdcInsn(name);
         mv.visitLdcInsn(desc);
+        System.out.println("*************************** Idx ");
         switch (opcode) {
             case GETSTATIC:
                 mv.visitMethodInsn(INVOKESTATIC, Config.analysisClass, "GETSTATIC",
                         "(IILjava/lang/String;Ljava/lang/String;Ljava/lang/String;)V");
+                System.out.println("Idx "+ClassDepot.instance.getStaticFieldIndex(owner,name));
                 mv.visitFieldInsn(opcode, owner, name, desc);
                 addValueReadInsn(mv,desc,"GETFIELDORSTATIC_");
                 break;
             case PUTSTATIC:
                 mv.visitMethodInsn(INVOKESTATIC, Config.analysisClass, "PUTSTATIC",
                         "(IILjava/lang/String;Ljava/lang/String;Ljava/lang/String;)V");
+                System.out.println("Idx "+ClassDepot.instance.getStaticFieldIndex(owner,name));
                 mv.visitFieldInsn(opcode, owner, name, desc);
                 break;
             case GETFIELD:
                 mv.visitMethodInsn(INVOKESTATIC, Config.analysisClass, "GETFIELD",
                         "(IILjava/lang/String;Ljava/lang/String;Ljava/lang/String;)V");
+                System.out.println("Idx "+ClassDepot.instance.getStaticFieldIndex(owner,name));
                 mv.visitFieldInsn(opcode, owner, name, desc);
                 addValueReadInsn(mv,desc,"GETFIELDORSTATIC_");
                 break;
             case PUTFIELD:
                 mv.visitMethodInsn(INVOKESTATIC, Config.analysisClass, "PUTFIELD",
                         "(IILjava/lang/String;Ljava/lang/String;Ljava/lang/String;)V");
+                System.out.println("Idx "+ClassDepot.instance.getStaticFieldIndex(owner,name));
                 mv.visitFieldInsn(opcode, owner, name, desc);
                 break;
             default:
